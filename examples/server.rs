@@ -55,7 +55,7 @@ async fn rocket() -> _ {
 
     rocket::build()
         .mount("/", routes![index])
-        .mount("/passwordless/api", routes![register])
+        .mount("/passwordless/api", routes![register, login])
         .mount("/static", FileServer::from("examples/static"))
         .manage(client)
         .attach(Template::fairing())
