@@ -24,11 +24,8 @@ pub async fn register(client: &State<PasswordlessClient>, data: Json<Value>) -> 
 }
 
 #[post("/login", format = "json", data = "<data>")]
-pub async fn login(client: &State<PasswordlessClient>, data: Json<Value>) -> Value {
-    let request = SignInVerifyRequest {
-        token: data.get("token").unwrap().to_string(),
-    };
-    let response = client.sign_in(&request).await.unwrap();
+pub async fn login(client: &State<PasswordlessClient>, data: Json<SignInVerifyRequest>) -> Value {
+    let response = client.sign_in(&data).await.unwrap();
     json!(response)
 }
 

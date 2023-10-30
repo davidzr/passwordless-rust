@@ -1,4 +1,5 @@
 use serde::Serialize;
+use serde_json::Value;
 
 use crate::models::{
     DeleteCredentialRequest, RegisterRequest, RegisterResponse, SignInVerifyRequest,
@@ -36,8 +37,8 @@ impl PasswordlessClient {
     pub async fn sign_in(
         &self,
         register_request: &SignInVerifyRequest,
-    ) -> Result<SignInVerifyResponse, reqwest::Error> {
-        let result: SignInVerifyResponse = self
+    ) -> Result<Value, reqwest::Error> {
+        let result: Value = self
             .send_request(register_request, "signin/verify")
             .await?
             .json()
