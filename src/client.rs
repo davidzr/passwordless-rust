@@ -50,14 +50,14 @@ impl PasswordlessClient {
         &self,
         request: &DeleteCredentialRequest,
     ) -> Result<reqwest::Response, reqwest::Error> {
-        let result = self.send_request(request, "signin/verify").await?;
+        let result = self.send_request(request, "credentials/delete").await?;
         return Ok(result);
     }
 
     pub async fn list_credentials(
         &self,
     ) -> Result<Vec<Credential>, reqwest::Error> {
-        let result: Vec<Credential> = self.send_get_request("signin/verify").await?.json().await?;
+        let result: Vec<Credential> = self.send_get_request("credentials/list").await?.json().await?;
         return Ok(result);
     }
 
